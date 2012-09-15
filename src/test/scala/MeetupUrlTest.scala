@@ -10,7 +10,4 @@ class MeetupUrlTest extends FunSuite {
     	{ new MeetupUrl().getEventsUrl("test-site") }
   }
  
-  //test("disposition") {
-  //  expect("Awesome") { new MeetupClient().disposition }
-  //}
 }
