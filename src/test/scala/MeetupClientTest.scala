@@ -9,8 +9,5 @@ class MeetupClientTest extends FunSuite {
 		val events = new MeetupClient().getEvents()
 		assert(events.length==7)
   	}
- 
-  //test("disposition") {
-  //  expect("Awesome") { new MeetupClient().disposition }
-  //}
+
 }
