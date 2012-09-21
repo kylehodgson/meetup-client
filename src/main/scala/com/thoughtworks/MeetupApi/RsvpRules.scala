@@ -1,4 +1,4 @@
-package com.thoughtworks
+package com.thoughtworks.MeetupApi
 
 /**
  * User: Thoughtworks
@@ -6,12 +6,11 @@ package com.thoughtworks
  * Time: 12:16 PM
  */
 
-case class MeetupApiRsvpRules(
+case class RsvpRules(
                                closed: Int,
                                guest_limit: Int,
-                               waitlisting: String)
-{
-  def toMap: Map[String,Any] = {
+                               waitlisting: String) {
+  def toMap: Map[String, Any] = {
     Map(
       "closed" -> closed,
       "guest_limit" -> guest_limit,

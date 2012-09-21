@@ -1,27 +1,71 @@
 package com.thoughtworks.test
 
-import org.scalatest.FunSuite
-import com.thoughtworks._
 import com.codahale.jerkson.Json
+import com.thoughtworks._
+import Model._
+import MeetupApi._
+import Repository._
+import java.util.Calendar
 
 
-class MeetupRepositoryTest extends FunSuite {
-	test("should be able to save an event") {
-		val response = Json.parse[MeetupApiEventsResponse](testJson)
-    	println("-------- MeetupRepositoryTest (response): " + response)
-    	val event = response.results(0)
-    	event.hydrate()
-    	println("-------- MeetupRepositoryTest (event): " + event)
-		val repo = new MeetupRepository()
-		val ret = repo.SaveOrUpdate(event)
+/**
+ * User: Thoughtworks
+ * Date: 9/20/12
+ * Time: 3:34 PM
+ */
+class TestUtils {
+  val repo = new EventRepository()
+  val db = repo.getDb
+  val eventColl = db("meetup_manager")("meetup_events")
 
-		val listEvents = repo.FutureEvents()
-		println("******** MeetupRepositoryTest: " + listEvents(0).toString)
-		//assert (listEvents(0).venue.name = "Uken Games Test")
+  def createFutureMeetups() {
 
-	}
+    val twoWeeksFromNow = Calendar.getInstance
+    twoWeeksFromNow.add(Calendar.DAY_OF_YEAR,14)
 
-val testJson = """
+    val event1 = new Event(
+      getMeetup.toEvent.eventType,
+      getMeetup.toEvent.groupName,
+      getMeetup.toEvent.venueName,
+      getMeetup.toEvent.venueAddress,
+      twoWeeksFromNow.getTime,
+      getMeetup.toEvent.url,
+      getMeetup.toEvent.description)
+
+    val event2 = new Event(
+      getMeetup.toEvent.eventType,
+      getMeetup.toEvent.groupName,
+      getMeetup.toEvent.venueName,
+      getMeetup.toEvent.venueAddress,
+      twoWeeksFromNow.getTime,
+      getMeetup.toEvent.url,
+      getMeetup.toEvent.description)
+
+    repo.SaveOrUpdate(event1)
+    repo.SaveOrUpdate(event2)
+  }
+
+  def countMeetupEvents(): Long = {
+
+    val eventColl = db("meetup_manager")("meetup_events")
+    val i = eventColl.count
+    return i
+  }
+
+  def deleteMeetupEvents() {
+    val eventColl = db("meetup_manager")("meetup_events")
+    eventColl.drop()
+  }
+
+  def getMeetup: Meetup = {
+    Json.parse[EventsResponse](testJson).results(0)
+  }
+
+  def getTestResponse = {
+    Json.parse[EventsResponse](testJson)
+  }
+
+  val testJson = """
 {
 	"results":
 	[
@@ -82,5 +126,5 @@ val testJson = """
 		"lat":""
 	}
 }
-"""
+                 """
 }

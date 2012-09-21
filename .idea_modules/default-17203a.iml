@@ -28,18 +28,27 @@
     <orderEntry type="library" name="net.databinder.dispatch_core_2.9.1_0.9.1" level="project" />
     <orderEntry type="library" name="com.ning_async-http-client_1.7.5" level="project" />
     <orderEntry type="library" name="io.netty_netty_3.4.4.Final" level="project" />
-    <orderEntry type="library" name="org.slf4j_slf4j-api_1.6.2" level="project" />
     <orderEntry type="library" name="org.mockito_mockito-core_1.9.5-rc1" level="project" />
     <orderEntry type="library" name="org.hamcrest_hamcrest-core_1.1" level="project" />
     <orderEntry type="library" name="org.objenesis_objenesis_1.0" level="project" />
-    <orderEntry type="library" name="com.mongodb.casbah_casbah-query_2.9.0-1_2.1.5.0" level="project" />
-    <orderEntry type="library" name="com.mongodb.casbah_casbah-commons_2.9.0-1_2.1.5.0" level="project" />
-    <orderEntry type="library" name="org.mongodb_mongo-java-driver_2.5.3" level="project" />
-    <orderEntry type="library" name="org.scalaj_scalaj-collection_2.8.0_1.0" level="project" />
-    <orderEntry type="library" name="org.scala-tools.time_time_2.8.0_0.2" level="project" />
-    <orderEntry type="library" name="joda-time_joda-time_1.6" level="project" />
-    <orderEntry type="library" name="com.mongodb.casbah_casbah-core_2.9.0-1_2.1.5.0" level="project" />
-    <orderEntry type="library" name="com.mongodb.casbah_casbah-gridfs_2.9.0-1_2.1.5.0" level="project" />
+    <orderEntry type="library" name="com.novus_salat-util_2.9.1_1.9.1" level="project" />
+    <orderEntry type="library" name="org.slf4j_slf4j-api_1.6.4" level="project" />
+    <orderEntry type="library" name="org.scala-lang_scalap_2.9.1" level="project" />
+    <orderEntry type="library" name="org.scala-lang_scala-compiler_2.9.1" level="project" />
+    <orderEntry type="library" name="com.novus_salat-core_2.9.1_1.9.1" level="project" />
+    <orderEntry type="library" name="org.mongodb_casbah-util_2.9.1_2.4.1" level="project" />
+    <orderEntry type="library" name="org.scalaj_scalaj-collection_2.9.1_1.2" level="project" />
+    <orderEntry type="library" name="org.scala-tools.time_time_2.9.1_0.5" level="project" />
+    <orderEntry type="library" name="joda-time_joda-time_1.6.2" level="project" />
+    <orderEntry type="library" name="org.specs2_specs2_2.9.1_1.7.1" level="project" />
+    <orderEntry type="library" name="org.specs2_specs2-scalaz-core_2.9.1_6.0.1" level="project" />
+    <orderEntry type="library" name="org.mongodb_mongo-java-driver_2.8.0" level="project" />
+    <orderEntry type="library" name="org.mongodb_casbah-commons_2.9.1_2.4.1" level="project" />
+    <orderEntry type="library" name="org.mongodb_casbah-core_2.9.1_2.4.1" level="project" />
+    <orderEntry type="library" name="org.mongodb_casbah-query_2.9.1_2.4.1" level="project" />
+    <orderEntry type="library" name="org.mongodb_casbah-gridfs_2.9.1_2.4.1" level="project" />
+    <orderEntry type="library" name="net.liftweb_lift-json_2.9.1_2.4" level="project" />
+    <orderEntry type="library" name="com.thoughtworks.paranamer_paranamer_2.3" level="project" />
     <orderEntry type="library" name="com.codahale_jerkson_2.9.1_0.5.0" level="project" />
     <orderEntry type="library" name="org.codehaus.jackson_jackson-core-asl_1.9.9" level="project" />
     <orderEntry type="library" name="org.codehaus.jackson_jackson-mapper-asl_1.9.9" level="project" />

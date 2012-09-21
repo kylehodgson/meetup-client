@@ -1,11 +1,11 @@
-package com.thoughtworks
+package com.thoughtworks.MeetupApi
 
 /**
  * User: Thoughtworks
  * Date: 9/20/12
  * Time: 12:16 PM
  */
-case class MeetupApiVenue(
+case class Venue(
                            id: Int,
                            lon: Float,
                            name: String,
@@ -13,7 +13,6 @@ case class MeetupApiVenue(
                            address_1: String,
                            lat: Float,
                            country: String,
-                           city: String)
-{
+                           city: String) {
   override def toString = name + " (" + address_1 + ")"
 }

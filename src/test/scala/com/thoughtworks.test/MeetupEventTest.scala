@@ -1,40 +1,40 @@
 package com.thoughtworks.test
 
 import org.scalatest.FunSuite
-import com.thoughtworks.MeetupApiEventsResponse
 import com.codahale.jerkson.Json
+import com.thoughtworks.MeetupApi._
 
 class MeetupEventTest extends FunSuite {
- 
+
   test("should be able to create an event from JSON") {
-  	val response = Json.parse[MeetupApiEventsResponse](testJson)
-    var event = response.results(0)
+    val response = Json.parse[EventsResponse](testJson)
+    val event = response.results(0)
     assert(event.toString == "NewRelic and Uken Games", "Test object failed to parse succesfully. Failed in parse case class MeetupApiEvent.toString. Should have received 'NewRelic and Uken Games', received instead " + event.toString)
     assert(event.rsvp_limit == 70, "Failed to parse MeetupApiEvent from JSON. rsvp_limit should be 70, was " + event.rsvp_limit)
     assert(event.status == "upcoming")
     assert(event.visibility == "public")
-    assert(event.maybe_rsvp_count==0)
-    assert(event.id=="82213942")
-    assert(event.utc_offset== -14400000)
-    assert(event.venue.id==9239932)
-    assert(event.venue.name=="Uken Games", "Failed to parse MeetupApiEvent and corresponding MeetupApiVenue from JSON. event.venue.name should be 'Uken Games', was instead " + event.venue.name)
-    assert(event.group.name=="DevOps Toronto","Failed to parse MeetupApiEvent and corresponding MeetupApiGroup from JSON. event.group.name should be 'DevOps Toronto', was instead " + event.group.name)
-    assert(event.venue.toString=="Uken Games (639 Queen Street West, Toronto)")
+    assert(event.maybe_rsvp_count == 0)
+    assert(event.id == "82213942")
+    assert(event.utc_offset == -14400000)
+    assert(event.venue.id == 9239932)
+    assert(event.venue.name == "Uken Games", "Failed to parse MeetupApiEvent and corresponding MeetupApiVenue from JSON. event.venue.name should be 'Uken Games', was instead " + event.venue.name)
+    assert(event.group.name == "DevOps Toronto", "Failed to parse MeetupApiEvent and corresponding MeetupApiGroup from JSON. event.group.name should be 'DevOps Toronto', was instead " + event.group.name)
+    assert(event.venue.toString == "Uken Games (639 Queen Street West, Toronto)")
   }
 
   test("should be able to handle errors where we dont have permission to view 'private' groups") {
 
-  	try {
-  		val response = Json.parse[MeetupApiEventsResponse](errorJson)
-  		assert(response.meta("description").contains("Events in private groups are available only to authenticated members of those groups."))
-  	} catch {
-  		case e: Exception =>  {
-  			assert(false,"MeetupApiEvent shouldnt throw errors when we dont have permission to view private groups.")
-  		}
-  	}  	
+    try {
+      val response = Json.parse[EventsResponse](errorJson)
+      assert(response.meta("description").contains("Events in private groups are available only to authenticated members of those groups."))
+    } catch {
+      case e: Exception =>
+        assert(false, "MeetupApiEvent shouldnt throw errors when we dont have permission to view private groups.")
+
+    }
   }
 
-val testJson = """
+  val testJson = """
 {
 	"results":
 	[
@@ -94,14 +94,12 @@ val testJson = """
 		"method":"Events",
 		"lat":""
 	}
-}
-"""
- 
+}"""
 
- val errorJson  = """
+
+  val errorJson = """
  {
  	"results":[],
  	"meta":
- 		{"lon":"","count":0,"link":"http:\/\/api.meetup.com\/2\/events\/","next":"","total_count":0,"url":"http:\/\/api.meetup.com\/2\/events\/?key=91265472064185a5951581b526b175f&status=upcoming&order=time&group_urlname=CMP-TO&desc=false&offset=0&format=json&page=200&fields=rsvpable%2Crsvp_rules","id":"","title":"Meetup Events v2","updated":1347897242429,"description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](\/meetup_api\/docs\/2\/open_events).","method":"Events","lat":""}}
- """
+ 		{"lon":"","count":0,"link":"http:\/\/api.meetup.com\/2\/events\/","next":"","total_count":0,"url":"http:\/\/api.meetup.com\/2\/events\/?key=91265472064185a5951581b526b175f&status=upcoming&order=time&group_urlname=CMP-TO&desc=false&offset=0&format=json&page=200&fields=rsvpable%2Crsvp_rules","id":"","title":"Meetup Events v2","updated":1347897242429,"description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](\/meetup_api\/docs\/2\/open_events).","method":"Events","lat":""}}"""
 }
