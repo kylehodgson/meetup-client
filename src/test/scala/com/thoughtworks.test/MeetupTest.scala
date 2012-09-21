@@ -4,7 +4,7 @@ import org.scalatest.FunSuite
 import com.codahale.jerkson.Json
 import com.thoughtworks.MeetupApi._
 
-class MeetupEventTest extends FunSuite {
+class MeetupTest extends FunSuite {
 
   test("should be able to create an event from JSON") {
     val response = Json.parse[EventsResponse](testJson)
