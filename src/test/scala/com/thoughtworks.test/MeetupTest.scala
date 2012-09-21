@@ -1,14 +1,12 @@
 package com.thoughtworks.test
 
 import org.scalatest.FunSuite
-import com.codahale.jerkson.Json
-import com.thoughtworks.MeetupApi._
+import java.util.Date
 
 class MeetupTest extends FunSuite {
 
-  test("should be able to create an event from JSON") {
-    val response = Json.parse[EventsResponse](testJson)
-    val event = response.results(0)
+  test("should be able to create a meetup from JSON") {
+    val event = new TestUtils().getMeetup
     assert(event.toString == "NewRelic and Uken Games", "Test object failed to parse succesfully. Failed in parse case class MeetupApiEvent.toString. Should have received 'NewRelic and Uken Games', received instead " + event.toString)
     assert(event.rsvp_limit == 70, "Failed to parse MeetupApiEvent from JSON. rsvp_limit should be 70, was " + event.rsvp_limit)
     assert(event.status == "upcoming")
@@ -17,89 +15,20 @@ class MeetupTest extends FunSuite {
     assert(event.id == "82213942")
     assert(event.utc_offset == -14400000)
     assert(event.venue.id == 9239932)
-    assert(event.venue.name == "Uken Games", "Failed to parse MeetupApiEvent and corresponding MeetupApiVenue from JSON. event.venue.name should be 'Uken Games', was instead " + event.venue.name)
+    assert(event.venue.name == "Uken Games Test", "Failed to parse MeetupApiEvent and corresponding MeetupApiVenue from JSON. event.venue.name should be 'Uken Games', was instead " + event.venue.name)
     assert(event.group.name == "DevOps Toronto", "Failed to parse MeetupApiEvent and corresponding MeetupApiGroup from JSON. event.group.name should be 'DevOps Toronto', was instead " + event.group.name)
-    assert(event.venue.toString == "Uken Games (639 Queen Street West, Toronto)")
+
   }
 
-  test("should be able to handle errors where we dont have permission to view 'private' groups") {
-
-    try {
-      val response = Json.parse[EventsResponse](errorJson)
-      assert(response.meta("description").contains("Events in private groups are available only to authenticated members of those groups."))
-    } catch {
-      case e: Exception =>
-        assert(false, "MeetupApiEvent shouldnt throw errors when we dont have permission to view private groups.")
-
-    }
+  test("should be able to convert meetup to event") {
+    val meetup = new TestUtils().getMeetup
+    val event = meetup.toEvent
+    assert(event.description==meetup.description,"Event description incorrect")
+    assert(event.eventType=="meetup.com","Event type incorrect")
+    assert(event.url==meetup.event_url,"Event url incorrect")
+    assert(event.groupName==meetup.group.name, "Event group name incorrect")
+    assert(event.venueAddress==meetup.venue.address_1, "Event venue address incorrect")
+    assert(event.venueName==meetup.venue.name, "Event venue name incorrect")
+    assert(event.date==new Date(meetup.time), "Event venue name incorrect")
   }
-
-  val testJson = """
-{
-	"results":
-	[
-		{
-			"rsvp_limit":70,
-			"status":"upcoming",
-			"visibility":"public",
-			"maybe_rsvp_count":0,
-			"venue":{
-				"id":9239932,
-				"lon":-79.403465,
-				"name":"Uken Games",
-				"state":"ON",
-				"address_1":
-				"639 Queen Street West, Toronto",
-				"lat":43.647301,
-				"country":"ca",
-				"city":"Toronto"},
-			"id":"82213942",
-			"utc_offset":-14400000,
-			"duration":10800000,
-			"time":1348614000000,
-			"waitlist_count":0,
-			"updated":1347550851000,
-			"created":1347545214000,
-			"yes_rsvp_count":34,
-			"event_url":"http:\/\/www.meetup.com\/DevOpsTO\/events\/82213942\/",
-			"description":"<p>Greetings DevOp'ers!<\/p>\n<p>I'm excited to invite you out to what's sure to be another exciting event. For those who missed last month's event, the topic of NewRelic came up rather organically. Given the unsolicited?enthusiasm?expressed?by a number of NewRelic customer in?attendance, I thought it only fitting to that we explore what the hub-bub is all about.<\/p>\n<p>Given their enthusiasm for NewRelic, Uken Games has generously offered to host the event as well present. ?Also, NewRelic's has generously offered to sponsor the event. ?No one who works for NewRelic will be speaking (or even attending as far as I know). ?I believe there will be some Pizza, beer, and swag.?Here's some info on our talks:<\/p>\n<p><strong>NewRelic and Uken - Pitr Vernigorov<\/strong><\/p>\n<p>Uken's lead architect will provide an overview of NewRelic by using Uken as a case study. ?Uken's games have tens of thousands of concurrent players and require over 100 servers, and NewRelic has been critical in helping us scale. ?It has replaced multiple tools, with features like exception collection, log analysis, server monitoring and alerting. ?It has also turned all our developers into devops through its easy?access?to data and visualization tools. ?Pitr will also provide examples of how we are able to easily identify performance issues from a high level and dig deep to find the culprit.<\/p>\n<p><strong>NewRelic's Custom Dashboards - Adam Proctor<\/strong> <strong><br \/>\n\n<\/strong> Custom dashboards are a powerful but lesser known feature of NewRelic. ?Adam will show how to expose the massive data that NewRelic collects.<\/p>\n<p><strong>About Uken Games<\/strong> <strong><br \/>\n\n<\/strong> Uken is one of the only truly cross platform gaming companies around. We build top ranking games for iPhone, iPad, Android, BlackBerry, and Facebook -- all in HTML5. ?Our titles include Forces Of War, Crime Inc., and Dark Galaxy. We?ve consistently grown our game communities to millions of users who love and enjoy our games everyday. Most recently, we've set out to reinvent the monster collection genre that Pokemon made famous with our latest title Mighty Monsters for iOS?and we?re just getting started.<\/p>\n<p>?<\/p>\n<p>?<\/p>\n\n",
-			"name":"NewRelic and Uken Games",
-			"group":{
-				"id":1799479,
-				"group_lat":43.66999816894531,
-				"name":"DevOps Toronto",
-				"group_lon":-79.41000366210938,
-				"join_mode":"open",
-				"urlname":"DevOpsTO",
-				"who":"Smooth DevOperators"},
-			"rsvpable": true,
-			"rsvp_rules": {
-				"waitlisting":"auto",
-				"guest_limit":2,
-				"closed":0}
-		}
-	],
-	"meta":
-	{
-		"lon":"",
-		"count":1,
-		"link":"http:\/\/api.meetup.com\/2\/events\/",
-		"next":"",
-		"total_count":1,
-		"url":"http:\/\/api.meetup.com\/2\/events\/?key=91265472064185a5951581b526b175f&status=upcoming&order=time&group_urlname=DevOpsTo&desc=false&offset=0&format=json&page=200&fields=",
-		"id":"",
-		"title":"Meetup Events v2",
-		"updated":1347550851000,
-		"description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](\/meetup_api\/docs\/2\/open_events).",
-		"method":"Events",
-		"lat":""
-	}
-}"""
-
-
-  val errorJson = """
- {
- 	"results":[],
- 	"meta":
- 		{"lon":"","count":0,"link":"http:\/\/api.meetup.com\/2\/events\/","next":"","total_count":0,"url":"http:\/\/api.meetup.com\/2\/events\/?key=91265472064185a5951581b526b175f&status=upcoming&order=time&group_urlname=CMP-TO&desc=false&offset=0&format=json&page=200&fields=rsvpable%2Crsvp_rules","id":"","title":"Meetup Events v2","updated":1347897242429,"description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](\/meetup_api\/docs\/2\/open_events).","method":"Events","lat":""}}"""
 }
