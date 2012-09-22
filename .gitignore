@@ -10,3 +10,4 @@ project/plugins/project/
 .idea/
 .scala_dependencies
 .idea/*
+.idea_modules/*

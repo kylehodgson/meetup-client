@@ -11,19 +11,17 @@ class Client {
 
   def getSites = sites
 
-  def getEventsFor(site: String): List[Meetup] = {
-    var events = List[Meetup]()
+  def getEventsFor(site: String) = {
+
     val svc = url(new Url().getEventsUrl(site))
     val responses = Http(svc OK as.String)
-    for (r <- responses) {
-      val apiResponse = Json.parse[EventsResponse](r)
-      if (apiResponse.results.length > 0) {
-        val event = Json.parse[EventsResponse](r).results(0)
-        events = event :: events
-      }
 
-    }
-    events
+    for  {
+      r <- responses
+      apiResponse = Json.parse[EventsResponse](r)
+      if apiResponse.results.length > 0
+    } yield Json.parse[EventsResponse](r).results(0)
+
   }
 
 }
