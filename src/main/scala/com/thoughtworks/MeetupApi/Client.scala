@@ -20,7 +20,7 @@ class Client {
       r <- responses
       apiResponse = Json.parse[EventsResponse](r)
       if apiResponse.results.length > 0
-    } yield Json.parse[EventsResponse](r).results(0)
+    } apiResponse
 
   }
 
