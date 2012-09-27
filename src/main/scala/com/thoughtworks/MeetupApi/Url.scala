@@ -14,7 +14,7 @@ class Url {
 
   private val config = Map(
     ("base-url", "http://api.meetup.com/2/"),
-    ("key", "91265472064185a5951581b526b175f"),
+    ("key", System.getenv("COMMUNITY_EMAILER_MEETUP_APIKEY")),
     ("by-group", "group_urlname"),
     ("events", "events"))
   private val fieldList = List[String]("rsvpable", "rsvp_rules")

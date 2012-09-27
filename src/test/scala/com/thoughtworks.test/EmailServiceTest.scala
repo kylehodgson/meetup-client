@@ -3,7 +3,7 @@ package com.thoughtworks.test
 import org.scalatest.{BeforeAndAfter, FunSuite}
 import com.thoughtworks.Service.EmailService
 
-class EmailWriterTest extends FunSuite with BeforeAndAfter {
+class EmailServiceTest extends FunSuite with BeforeAndAfter {
   var utils: TestUtils = _
   var target: EmailService = _
 
@@ -26,10 +26,13 @@ class EmailWriterTest extends FunSuite with BeforeAndAfter {
   }
 
 
-  after {
+  test("Calls to EmailSender.SendEmail don't fail") {
 
+    utils.createFutureMeetups()
 
+    target.SendEmail
   }
+
 
 
 }

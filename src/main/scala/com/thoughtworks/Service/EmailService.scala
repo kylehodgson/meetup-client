@@ -19,7 +19,26 @@ class EmailService {
   }
 
   def SendEmail{
+    val properties = System.getProperties
+    val smtpUserName: String = System.getenv("COMMUNITY_EMAILER_GMAIL_USERNAME")
+    val smtpPassword: String = System.getenv("COMMUNITY_EMAILER_GMAIL_PASSWORD")
+    val recipient: String = "khodgson@thoughtworks.com"
+    val smtpServer: String = "smtp.gmail.com"
+    val tcpPort: Int = 465
 
+    val body: String = writeMessage
+    val session = Session.getDefaultInstance(properties)
+    val message = new MimeMessage(session)
 
+    message.setFrom(new InternetAddress(smtpUserName))
+    message.setRecipients(Message.RecipientType.TO, recipient)
+    message.setSubject("Toronto Community Events")
+    message.setContent(body, "text/html" )
+
+    val transport = session.getTransport("smtps")
+
+    transport.connect(smtpServer, tcpPort, smtpUserName, smtpPassword)
+    val addresses = List[Address](new InternetAddress (recipient))
+    transport.sendMessage(message, addresses.toArray)
   }
 }
