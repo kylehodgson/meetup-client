@@ -9,26 +9,23 @@ import java.util.Date
  * Date: 9/20/12
  * Time: 12:13 PM
  */
-case class Meetup(
-                           rsvp_limit: Int,
-                           status: String,
-                           visibility: String,
-                           maybe_rsvp_count: Int,
-                           venue: Venue,
-                           id: String,
-                           utc_offset: Int,
-                           duration: Int,
-                           time: Int,
-                           waitlist_count: Int,
-                           updated: Int,
-                           created: Int,
-                           yes_rsvp_count: Int,
-                           event_url: String,
-                           description: String,
-                           name: String,
-                           group: Group,
-                           rsvpable: Boolean,
-                           rsvp_rules: RsvpRules) {
+case class Meetup(status: String,
+                  visibility: String,
+                  maybe_rsvp_count: Int,
+                  venue: Venue,
+                  id: String,
+                  utc_offset: Int,
+                  time: Int,
+                  waitlist_count: Int,
+                  updated: Int,
+                  created: Int,
+                  yes_rsvp_count: Int,
+                  event_url: String,
+                  description: String,
+                  name: String,
+                  group: Group,
+                  rsvpable: Boolean,
+                  rsvp_rules: RsvpRules) {
 
   override def toString = name
 

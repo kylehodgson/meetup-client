@@ -11,11 +11,10 @@ class Client {
 
   def getSites = sites
 
-  def getEventsFor(site: String) = {
+  def getEventsFor(site: String)  = {
 
-    val svc = url(new Url().getEventsUrl(site))
+    val svc = url(new Url().getEventsUrl(site)) <:< Map("Accept-Charset" -> "utf-8")
     val responses = Http(svc OK as.String)
-
     for  {
       r <- responses
       apiResponse = Json.parse[EventsResponse](r)
@@ -23,5 +22,4 @@ class Client {
     } yield apiResponse
 
   }
-
 }

@@ -16,9 +16,14 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "1.6.1" % "test",
   "net.databinder.dispatch" %% "core" % "0.9.1",
   "org.mockito" % "mockito-core" % "1.9.5-rc1",
-  "com.novus" %% "salat" % "1.9.1"
+  "com.novus" %% "salat" % "1.9.1",
+  "javax.mail" % "mail" % "1.4.2"
 )
 
 resolvers ++= Seq("Codahale" at "http://repo.codahale.com")
 
 libraryDependencies ++= Seq("com.codahale" %% "jerkson" % "0.5.0")
+
+resolvers ++= Seq("snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
+  "releases"  at "http://oss.sonatype.org/content/repositories/releases")
+

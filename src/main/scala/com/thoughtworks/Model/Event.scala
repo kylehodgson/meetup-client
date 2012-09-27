@@ -15,12 +15,13 @@ case class Event(
                   date: Date,
                   url: String,
                   description: String) {
-  def toEmail = {
-    "Event group name: " + groupName + "\n" +
-    "Venue: " + venueName + "\n" +
-    "Address: " + venueAddress + "\n" +
-    "Date: " + date.toString + "\n" +
-    "\n" + description
+  def toHtmlEmail = {
+    "<p>"
+    "<b>Group name:</b>" + groupName + "\n" +
+    "<b>Venue:</b>" + venueName + "\n" +
+    "<b>Address:</b>" + venueAddress + "\n" +
+    "<b>Date:</b>" + date.toString + "\n" +
+    "</p>\n" + description
   }
 
 }
