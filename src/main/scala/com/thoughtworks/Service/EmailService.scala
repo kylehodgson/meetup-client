@@ -18,7 +18,7 @@ class EmailService {
     paragraphs.mkString
   }
 
-  def SendEmail{
+  def SendEmail(){
     val properties = System.getProperties
     val smtpUserName: String = System.getenv("COMMUNITY_EMAILER_GMAIL_USERNAME")
     val smtpPassword: String = System.getenv("COMMUNITY_EMAILER_GMAIL_PASSWORD")

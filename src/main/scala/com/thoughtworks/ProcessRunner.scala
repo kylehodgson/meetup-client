@@ -10,7 +10,10 @@ import Service.{Crawler, EmailService}
 object ProcessRunner {
 
   def main(args: Array[String]) {
-    new Crawler().Crawl()
+    args(0) match {
+      case "emailer" => new EmailService().SendEmail()
+      case "crawler" => new Crawler().Crawl()
+    }
   }
 
 }
