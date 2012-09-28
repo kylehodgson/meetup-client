@@ -7,10 +7,10 @@ import Service.{Crawler, EmailService}
  * Date: 9/27/12
  * Time: 10:20 PM
  */
-class ProcessRunner {
+object ProcessRunner {
 
   def main(args: Array[String]) {
-
+    new Crawler().Crawl()
   }
 
 }

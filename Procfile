@@ -1,1 +1,1 @@
-worker: target/start ProcessRunner
+worker: target/start com.thoughtworks.ProcessRunner 

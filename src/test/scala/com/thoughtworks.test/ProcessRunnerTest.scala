@@ -10,7 +10,7 @@ import com.thoughtworks.ProcessRunner
  */
 class ProcessRunnerTest extends FunSuite{
 
-  val pRunner: ProcessRunner = new ProcessRunner
+  val pRunner = ProcessRunner
 
   test("Should run without exceptions") {
     pRunner.main( List("emailer").toArray)
