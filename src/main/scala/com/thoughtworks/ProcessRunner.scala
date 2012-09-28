@@ -10,9 +10,7 @@ import Service.{Crawler, EmailService}
 class ProcessRunner {
 
   def main(args: Array[String]) {
-    new Crawler().Crawl()
-    Thread.sleep(10000)
-    new EmailService().SendEmail
+
   }
 
 }

@@ -17,7 +17,7 @@ case class Event(
                   description: String) {
   def toHtmlEmail = {
     "<p>"
-    "<b>Group name:</b>" + groupName + "\n" +
+    "<h1>" + groupName + "</h1>\n" +
     "<b>Venue:</b>" + venueName + "\n" +
     "<b>Address:</b>" + venueAddress + "\n" +
     "<b>Date:</b>" + date.toString + "\n" +

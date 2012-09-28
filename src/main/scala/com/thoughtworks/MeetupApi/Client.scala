@@ -6,8 +6,34 @@ import com.codahale.jerkson.Json
 class Client {
 
   private val sites = List(
-    "toronto-code-retreat",
-    "toronto-coding-dojo")
+  "toronto-code-retreat",
+  "toronto-coding-dojo",
+  "atlanta-scala",
+  "CMP-TO",
+  "DevOpsTo",
+  "first100hours",
+  "GirlGeeksToronto",
+  "GraphTO",
+  "hackshackers",
+  "HTML5-Web-App-Developers",
+  "metrotorontoug",
+  "OpenStackTO",
+  "SproutUpTo",
+  "Startup-Grind-Toronto",
+  "TEDxToronto",
+  "Toronto-NET-Developer-Meetup",
+  "Toronto-dotNet-Hackers",
+  "Toronto-CTO-Group",
+  "TorontoHUG",
+  "toronto-high-scalability",
+  "Toronto-HTML-5-User-Group",
+  "torontojs",
+  "torontojshackers",
+  "Toronto-MongoDB-User-Group",
+  "toronto-net-tuesday",
+  "torontoruby",
+  "Toronto-Selenium-Meetup-Group"
+  )
 
   def getSites = sites
 
