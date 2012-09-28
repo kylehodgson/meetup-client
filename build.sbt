@@ -1,3 +1,7 @@
+import com.typesafe.startscript.StartScriptPlugin
+
+seq(StartScriptPlugin.startScriptForClassesSettings: _*)
+
 name := "meetup-client"
 
 version := "0.1"
@@ -24,6 +28,6 @@ resolvers ++= Seq("Codahale" at "http://repo.codahale.com")
 
 libraryDependencies ++= Seq("com.codahale" %% "jerkson" % "0.5.0")
 
-resolvers ++= Seq("snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
-  "releases"  at "http://oss.sonatype.org/content/repositories/releases")
+//resolvers ++= Seq("snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
+//  "releases"  at "http://oss.sonatype.org/content/repositories/releases")
 
