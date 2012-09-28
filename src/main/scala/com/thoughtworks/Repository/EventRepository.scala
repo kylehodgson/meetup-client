@@ -26,8 +26,8 @@ class EventRepository {
   }
 
   def connString = {
-    if ( System.getenv("COMMUNITY_EMAILER_MONGO_USERNAME") == None ) ""
-    else  System.getenv("COMMUNITY_EMAILER_MONGO_USERN  AME")
+    if ( System.getenv("COMMUNITY_EMAILER_MONGO_CONNECTION") == None ) ""
+    else  System.getenv("COMMUNITY_EMAILER_MONGO_CONNECTION")
   }
 
 }

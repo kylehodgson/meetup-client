@@ -13,7 +13,7 @@ class ClientTest extends FunSuite with BeforeAndAfter {
   test("getEvents") {
     var got_response = false
     val promise = target.getEventsFor("Toronto-CTO-Group")
-    Thread.sleep(2000)
+    Thread.sleep(20000)
     assert(promise != None)
     val event = promise()
     got_response = true

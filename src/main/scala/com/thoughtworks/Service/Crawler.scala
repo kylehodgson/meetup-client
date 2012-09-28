@@ -1,6 +1,7 @@
 package com.thoughtworks.Service
 
 import com.thoughtworks.MeetupApi.Client
+import com.thoughtworks.Repository.EventRepository
 
 /**
  * User: Thoughtworks
@@ -10,13 +11,28 @@ import com.thoughtworks.MeetupApi.Client
 class Crawler {
 
   val meetup: Client = new Client
+  val repo: EventRepository = new EventRepository
 
   def Crawl() {
+
+//    for {
+//      site <- meetup.getSites
+//      response <- meetup.getEventsFor(site)
+//      meetup <- response.results
+//      repo.SaveOrUpdate(meetup.toEvent)
+//    } yield true
+
     meetup.getSites.foreach(
-    site => (
-      meetup.getEventsFor(site)
+    site =>
+      meetup.getEventsFor(site).foreach(
+      response=>
+        response.results.foreach(
+        meetup =>
+          repo.SaveOrUpdate(meetup.toEvent)
+        )
       )
     )
+
   }
 
 }
