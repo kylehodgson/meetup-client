@@ -8,7 +8,8 @@ import com.novus.salat._
 import com.novus.salat.global._
 
 class EventRepository {
-  val mongoConn = MongoConnection()
+
+  val mongoConn = MongoConnection(connString)
   def getDb = mongoConn
   val eventColl = mongoConn("meetup_manager")("meetup_events")
 
@@ -22,6 +23,11 @@ class EventRepository {
       event <- eventColl.find("date" $gte  Calendar.getInstance.getTime)
         future = grater[Event].asObject(event)
     } yield future
+  }
+
+  def connString = {
+    if ( System.getenv("COMMUNITY_EMAILER_MONGO_USERNAME") == None ) ""
+    else  System.getenv("COMMUNITY_EMAILER_MONGO_USERN  AME")
   }
 
 }
